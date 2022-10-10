@@ -1,4 +1,7 @@
 import Image from "next/future/image"
+import Link from "next/link"
+
+
 import { HomeContainer, Product } from "../styles/pages/home"
 import { useKeenSlider } from 'keen-slider/react'
 
@@ -13,7 +16,7 @@ interface HomeProps {
     id: string;
     name: string;
     imageUrl: string;
-    price: number;
+    price: string;
 
   }[]
 }
@@ -31,11 +34,11 @@ export default function Home({ products }: HomeProps) {
     <HomeContainer ref={sliderRef} className='keen-slider'>
       {products.map(product => {
         return (
-          <Product
-            href={`/product/${product.id}`}
-            key={product.id}
-            className="keen-slider__slide"
-            >
+          <Link 
+           key={product.id}
+           href={`/product/${product.id}`}
+           >
+          <Product className="keen-slider__slide" >
              <Image 
              src={product.imageUrl} 
              width={520} 
@@ -48,6 +51,7 @@ export default function Home({ products }: HomeProps) {
               <span>{product.price}</span>
             </footer>
           </Product>
+          </Link>
         )
       })}
 
